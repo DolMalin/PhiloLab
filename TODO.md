@@ -11,9 +11,8 @@
 
 # Table of contents
 
-- [Model Logbook](#model-logbook)
-	- [Goal:](#goal)
-	- [Purpose of this document:](#purpose-of-this-document)
+- [Goal:](#goal)
+- [Purpose of this document:](#purpose-of-this-document)
 - [Table of contents](#table-of-contents)
 	- [TODOs](#todos)
 
