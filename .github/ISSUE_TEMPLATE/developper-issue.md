@@ -1,7 +1,7 @@
 ---
 name: Developper Issue
 about: Thanks for taking the time to fill out this feature request!
-title: As a [persona], I want to [functionality], so that [value (persona focused)].
+title: 'type(scope): description'
 labels: ''
 assignees: DolMalin
 
