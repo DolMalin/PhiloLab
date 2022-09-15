@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/15 16:07:01 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:22:50 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
-	write(1, "hello world\n", 13);
+	if (!check_input(ac, av))
+		return (0);
+	write(1, "PARSING OK\n", 12);
 	return (0);
 }
