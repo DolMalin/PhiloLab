@@ -23,8 +23,11 @@
 | Value | Time (H) | Label |                   Description | State |
 | :---- | :------- | :---: | ----------------------------: | ----: |
 | 90    | 0.2      |  Doc  |                       Logbook |   [x] |
-| 80    | 1        |  Doc  |      Define the philo problem |   [ ] |
-| 80    | 6 - 8    |  Doc  |   Make researches about philo |   [ ] |
+| 80    | 1        |  Doc  |      Define the philo problem |   [x] |
+| 70    | 1        |  Doc  | Make a mutex / thread cheatsheet | [ ] |
+| 90    | 2        |  Architecture | Define structures architecture (ask peers)| [ ] |
+| 90    | 0.3      |  Architecture | Makefile + Headers    | [ ] |
+| 70    | 1        |  Parsing | Update old parsing         | [ ] |
 
 
 [Table of contents](#table-of-contents)
