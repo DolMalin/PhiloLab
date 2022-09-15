@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/15 17:31:00 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:36:29 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <pthread.h>
 #include <sys/time.h>
 #include <stdio.h>
+#include <stdint.h>
 
 /* ================ ~ STRUCTURES ~ ================ */
 
