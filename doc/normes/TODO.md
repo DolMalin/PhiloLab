@@ -26,7 +26,7 @@
 | 80    | 1        |  Doc  |      Define the philo problem |   [x] |
 | 70    | 1        |  Doc  | Make a mutex / thread cheatsheet | [ ] |
 | 90    | 2        |  Architecture | Define structures architecture (ask peers)| [ ] |
-| 90    | 0.3      |  Architecture | Makefile + Headers    | [ ] |
+| 90    | 0.3      |  Architecture | Makefile + Headers    | [x] |
 | 70    | 1        |  Parsing | Update old parsing         | [ ] |
 
 
