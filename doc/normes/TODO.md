@@ -23,7 +23,7 @@
 | Value | Time (H) | Label |                   Description | State |
 | :---- | :------- | :---: | ----------------------------: | ----: |
 | 90    | 0.2      |  Doc  |                       Logbook |   [x] |
-| 80    | 1        |  Doc  |      Define the philo problem |   [ ] |
+| 80    | 1        |  Doc  |      Define the philo problem |   [x] |
 | 80    | 6 - 8    |  Doc  |   Make researches about philo |   [ ] |
 
 
