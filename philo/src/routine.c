@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 17:07:05 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:37:28 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ void	routine_think(t_philo *philo)
 void	*routine(void* arg)
 {
 	t_philo	*philo;
-	philo = arg;
+	int		i;
 	
+	philo = arg;
+	i = 0;
 	while (true)
 	{
-		// break if 
+		if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)
+			break;
 		routine_eat(philo);
 		routine_sleep(philo);
-		routine_think(philo);	
+		routine_think(philo);
+		i++;	
 	}
 	return (NULL);
 }

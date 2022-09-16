@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 16:59:54 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:18:21 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,10 @@ typedef enum	e_bool
 	true
 }				t_bool;
 
-typedef struct	s_philo
-{
-	int				id;
-	pthread_t		thread;
-	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*write_perm;
-}				t_philo;
 
 typedef struct	s_data
 {
-	t_philo			**philo_array;
+	struct s_philo	**philo_array;
 	pthread_mutex_t	*forks_array;
 	pthread_mutex_t	write_perm;
 	int				philo_nb;
@@ -52,6 +44,15 @@ typedef struct	s_data
 	int				meals_nb;
 }				t_data;
 
+typedef struct	s_philo
+{
+	int				id;
+	t_data			*data;
+	pthread_t		thread;
+	pthread_mutex_t	*fork_l;
+	pthread_mutex_t	*fork_r;
+	pthread_mutex_t	*write_perm;
+}				t_philo;
 
 /* ================ ~ UTILS ~ ================ */
 size_t	ft_strlen(const char *str);

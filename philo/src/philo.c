@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:06:38 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/16 16:45:19 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:27:28 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_philo	*philo_create(t_data *data, int philo_id)
 	philo->fork_l = &data->forks_array[philo->id - 1];
 	philo->fork_r = &data->forks_array[philo->id % data->philo_nb];
 	philo->write_perm = &data->write_perm;
+	philo->data = data;
 	pthread_create(&philo->thread, NULL, &routine, philo);
 	pthread_join(philo->thread, NULL);
 	return (philo);
