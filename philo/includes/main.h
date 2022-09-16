@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 15:13:55 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:25:35 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct	s_philo
 {
 	int				id;
 	pthread_t		thread;
+	pthread_mutex_t	*fork_l;
+	pthread_mutex_t	*fork_r;
 }				t_philo;
 
 typedef struct	s_data
@@ -56,7 +58,7 @@ int		ft_atoi(const char *str);
 t_bool	check_input(int ac, char **av);
 
 /* ================ ~ PHILO ~ ================ */
-t_philo **philo_create_array(int philo_nb);
+t_philo **philo_create_array(t_data *data);
 void	*philo_routine(void* arg);
 void	philo_free(t_philo **philo_array, int philo_nb);
 
