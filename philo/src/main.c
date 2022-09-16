@@ -6,11 +6,24 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 13:52:33 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 14:03:29 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
+
+void	philo_free(t_philo **philo_array, int philo_nb)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo_nb)
+	{
+		free(philo_array[i]);
+		i++;
+	}
+	free(philo_array);
+}
 
 void	*philo_routine(void* arg)
 {
@@ -21,7 +34,7 @@ void	*philo_routine(void* arg)
 	return (NULL);
 }
 
-t_philo	*create_philo(int philo_id)
+t_philo	*philo_create(int philo_id)
 {
 	t_philo *philo;
 	
@@ -35,7 +48,7 @@ t_philo	*create_philo(int philo_id)
 	return (philo);
 }
 
-t_philo **create_philo_array(int	philo_nb)
+t_philo **philo_create_array(int	philo_nb)
 {
 	t_philo	**philo_array;
 	int	i;
@@ -46,7 +59,7 @@ t_philo **create_philo_array(int	philo_nb)
 	i = 0;
 	while (i < philo_nb)
 	{
-		philo_array[i] = create_philo(i + 1);
+		philo_array[i] = philo_create(i + 1);
 		i++;
 	}
 	return(philo_array);
@@ -77,7 +90,8 @@ int	main(int ac, char **av)
 	data = init_data(ac, av);
 	if (!data)
 		return (0);
-	data->philo_array = create_philo_array(data->philo_nb);
+	data->philo_array = philo_create_array(data->philo_nb);
+	philo_free(data->philo_array, data->philo_nb);
 	free(data);
 	return (0);
 }
