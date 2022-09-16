@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
 /*   Updated: 2022/09/16 12:50:53 by pdal-mol         ###   ########.fr       */
@@ -30,14 +30,22 @@ typedef enum	e_bool
 	true
 }				t_bool;
 
+typedef struct	s_philo
+{
+	int				id;
+	pthread_t		thread;
+}				t_philo;
+
 typedef struct	s_data
 {
 	int				philo_nb;
+	t_philo			**philo_array;
 	int				time_to_die;
 	int				time_to_eat;
 	int 			time_to_sleep;
 	int				meals_nb;
 }				t_data;
+
 
 /* ================ ~ UTILS ~ ================ */
 size_t	ft_strlen(const char *str);
@@ -46,5 +54,9 @@ int		ft_atoi(const char *str);
 /* ================ ~ PARSING ~ ================ */
 t_bool	check_input(int ac, char **av);
 
+/* ================ ~ PHILO ~ ================ */
+t_philo **philo_create_array(int philo_nb);
+void	*philo_routine(void* arg);
+void	philo_free(t_philo **philo_array, int philo_nb);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/15 17:45:21 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:12:36 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main(int ac, char **av)
 	data = init_data(ac, av);
 	if (!data)
 		return (0);
+	data->philo_array = philo_create_array(data->philo_nb);
+	philo_free(data->philo_array, data->philo_nb);
 	free(data);
 	return (0);
 }
