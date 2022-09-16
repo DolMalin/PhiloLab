@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 15:16:27 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:20:08 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ pthread_mutex_t	*forks_init(int	philo_nb)
 		i++;
 	}
 	return (mutex_array);
+}
+
+void	data_free(t_data *data)
+{
+	philo_free(data->philo_array, data->philo_nb);
+	/* TODO:
+		Use of mutex destroy?
+	*/
+	free(data->forks_array);
+	free(data);
+	
 }
 
 t_data	*init_data(int ac, char **av)
@@ -64,7 +75,6 @@ int	main(int ac, char **av)
 		free(data);
 		return (0);
 	}
-	philo_free(data->philo_array, data->philo_nb);
-	free(data);
+	data_free(data);
 	return (0);
 }
