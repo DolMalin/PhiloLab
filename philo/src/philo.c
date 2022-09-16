@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:06:38 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/16 14:10:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 15:10:59 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static t_philo	*philo_create(int philo_id)
 	pthread_join(philo->thread, NULL);
 	return (philo);
 }
+
+/* TODO:
+	secure if philo_create return null and free all thats being allocated
+*/
 
 t_philo **philo_create_array(int philo_nb)
 {

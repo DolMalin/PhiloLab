@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 12:50:53 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:13:55 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ typedef struct	s_philo
 
 typedef struct	s_data
 {
-	int				philo_nb;
 	t_philo			**philo_array;
+	pthread_mutex_t	*forks_array;
+	int				philo_nb;
 	int				time_to_die;
 	int				time_to_eat;
 	int 			time_to_sleep;
