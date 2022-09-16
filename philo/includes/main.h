@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/15 17:36:29 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:50:53 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct	s_data
 	int				time_to_eat;
 	int 			time_to_sleep;
 	int				meals_nb;
-
 }				t_data;
 
 /* ================ ~ UTILS ~ ================ */
