@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 15:25:35 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:15:58 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,9 @@ t_bool	check_input(int ac, char **av);
 t_philo **philo_create_array(t_data *data);
 void	*philo_routine(void* arg);
 void	philo_free(t_philo **philo_array, int philo_nb);
+
+/* ================ ~ DATA ~ ================ */
+t_data	*data_init(int ac, char **av);
+void	data_free(t_data *data);
 
 #endif
