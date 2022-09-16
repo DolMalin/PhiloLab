@@ -27,9 +27,9 @@
 | 70    | 1        |  Doc  | Make a mutex / thread cheatsheet | [x] |
 | 90    | 0.3      |  Architecture | Makefile + Headers    | [x] |
 | 70    | 1        |  Parsing | Update old parsing         | [x] |
-| 90    | 2        |  Architecture | Define structures architecture (ask peers)| [ ] |
+| 80    | 3        |  Utils | Understand and start threads | [X] |
 | 70    | 2        |  Utils | Implement time functions     | [ ] |
-| 80    | 3        |  Utils | Understand and start threads | [ ] |
+| 80    | 2        |  Routine | Implement forks            | [ ] |
 
 
 [Table of contents](#table-of-contents)
