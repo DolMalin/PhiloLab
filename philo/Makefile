@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 15:59:41 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/09/15 16:35:35 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/09/16 14:12:02 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_FILES =	main.c \
-			check_input.c\
-			utils.c
+			check_input.c \
+			utils.c \
+			philo.c \
 
 SRC =		${addprefix src/, ${SRC_FILES}}
 OBJS = 		${SRC:.c=.o}

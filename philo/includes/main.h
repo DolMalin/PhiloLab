@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 13:52:41 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 14:11:04 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ int		ft_atoi(const char *str);
 /* ================ ~ PARSING ~ ================ */
 t_bool	check_input(int ac, char **av);
 
+/* ================ ~ PHILO ~ ================ */
+t_philo **philo_create_array(int philo_nb);
+void	*philo_routine(void* arg);
+void	philo_free(t_philo **philo_array, int philo_nb);
 
 #endif
