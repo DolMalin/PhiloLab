@@ -25,9 +25,11 @@
 | 90    | 0.2      |  Doc  |                       Logbook |   [x] |
 | 80    | 1        |  Doc  |      Define the philo problem |   [x] |
 | 70    | 1        |  Doc  | Make a mutex / thread cheatsheet | [x] |
-| 90    | 2        |  Architecture | Define structures architecture (ask peers)| [ ] |
 | 90    | 0.3      |  Architecture | Makefile + Headers    | [x] |
-| 70    | 1        |  Parsing | Update old parsing         | [ ] |
+| 70    | 1        |  Parsing | Update old parsing         | [x] |
+| 90    | 2        |  Architecture | Define structures architecture (ask peers)| [ ] |
+| 70    | 2        |  Utils | Implement time functions     | [ ] |
+| 80    | 3        |  Utils | Understand and start threads | [ ] |
 
 
 [Table of contents](#table-of-contents)
