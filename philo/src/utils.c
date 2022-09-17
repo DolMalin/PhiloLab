@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/15 17:30:50 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/17 14:11:02 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,25 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return ((int)(result * signe));
+}
+
+int	get_time(void)
+{
+	static struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	ft_usleep(unsigned int time)
+{
+	unsigned int	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+	{
+		// if (check_isdead(elem, start2))
+		// 	return ;
+		usleep(200);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:17:20 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/15 16:36:02 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/17 14:06:24 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_bool	all_positive_digits(char **av)
 	i = 1;
 	while (av[i])
 	{
-		if (!is_digit(av[i]) || av[i][0] == '0' || !ft_strlen(av[i]))
+		if (!is_digit(av[i]) || !ft_strlen(av[i]))
 			return (false);
 		i++;
 	}

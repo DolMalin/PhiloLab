@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 17:18:21 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/17 14:11:37 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void	data_free(t_data *data);
 
 /* ================ ~ ROUTINE ~ ================ */
 void	*routine(void* arg);
+int		get_time(void);
+void	ft_usleep(unsigned int time);
 
 #endif

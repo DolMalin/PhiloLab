@@ -6,12 +6,17 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 16:16:49 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:20:21 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
+/*
+TODO:
+
+	0 in parsing
+ */
 /* ================================================= */
 /*  DEBUG */
 void	log_forks(t_data *data)
@@ -28,6 +33,19 @@ void	log_forks(t_data *data)
 }
 /* ================================================= */
 
+
+void	join_philos(t_philo **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		pthread_join(array[i]->thread, NULL);
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -43,6 +61,7 @@ int	main(int ac, char **av)
 		free(data);
 		return (0);
 	}
+	join_philos(data->philo_array);
 	data_free(data);
 	return (0);
 }
