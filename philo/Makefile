@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 15:59:41 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/09/16 16:16:29 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/09/16 16:39:20 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ SRC_FILES =	main.c \
 			check_input.c \
 			utils.c \
 			philo.c \
-			data.c
+			data.c \
+			routine.c
 
 SRC =		${addprefix src/, ${SRC_FILES}}
 OBJS = 		${SRC:.c=.o}
