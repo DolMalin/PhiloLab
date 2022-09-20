@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:12:46 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/16 17:16:00 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:59:45 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ t_data	*data_init(int ac, char **av)
 	else
 		data->meals_nb = -1;
 	data->forks_array = forks_init(data->philo_nb);
-	pthread_mutex_init(&data->write_perm, NULL);
+	data->end_program = false;
+	pthread_mutex_init(&data->display_perm, NULL);
+	pthread_mutex_init(&data->rw_perm, NULL);
 	return (data);
 }
 

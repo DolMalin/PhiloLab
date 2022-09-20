@@ -6,11 +6,23 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/17 14:11:02 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:07:22 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
+
+t_bool	check_end_program(t_philo *philo)
+{
+	t_bool output;
+	
+	output = false;
+	pthread_mutex_lock(&philo->data->rw_perm);
+	if (philo->data->end_program)
+		output = true;
+	pthread_mutex_unlock(&philo->data->rw_perm);
+	return (output);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -57,15 +69,15 @@ int	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	ft_usleep(unsigned int time)
+void	ft_usleep(unsigned int time, t_philo *philo)
 {
 	unsigned int	start;
 
 	start = get_time();
 	while (get_time() - start < time)
 	{
-		// if (check_isdead(elem, start2))
-		// 	return ;
-		usleep(200);
+		if (check_end_program(philo))
+			return ;
+		usleep(1);
 	}
 }
