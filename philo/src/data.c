@@ -6,7 +6,11 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:12:46 by pdal-mol          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/21 11:38:20 by aandric          ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/09/20 17:49:46 by pdal-mol         ###   ########.fr       */
+>>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +55,7 @@ t_data	*data_init(int ac, char **av)
 	data->forks_array = forks_init(data->philo_nb);
 	data->end_program = false;
 	pthread_mutex_init(&data->display_perm, NULL);
-	pthread_mutex_init(&data->rw_perm, NULL);
+	pthread_mutex_init(&data->end_program_perm, NULL);
 	return (data);
 }
 

@@ -6,7 +6,11 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/21 11:37:08 by aandric          ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/09/20 17:49:39 by pdal-mol         ###   ########.fr       */
+>>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +39,7 @@ typedef struct	s_data
 	struct s_philo	**philo_array;
 	pthread_mutex_t	*forks_array;
 	pthread_mutex_t	display_perm;
-	pthread_mutex_t	rw_perm;
+	pthread_mutex_t	end_program_perm;
 	int				philo_nb;
 	int				time_zero;
 	int				time_to_die;
@@ -52,6 +56,7 @@ typedef struct	s_philo
 	int				last_meal;
 	int				start_time;
 	pthread_t		thread;
+	pthread_mutex_t	last_meal_perm;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
 }				t_philo;

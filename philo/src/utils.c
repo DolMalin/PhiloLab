@@ -6,7 +6,11 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/21 11:54:23 by aandric          ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/09/20 17:53:06 by pdal-mol         ###   ########.fr       */
+>>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +21,10 @@ t_bool	check_end_program(t_philo *philo)
 	t_bool output;
 	
 	output = false;
-	pthread_mutex_lock(&philo->data->rw_perm);
+	pthread_mutex_lock(&philo->data->end_program_perm);
 	if (philo->data->end_program)
 		output = true;
-	pthread_mutex_unlock(&philo->data->rw_perm);
+	pthread_mutex_unlock(&philo->data->end_program_perm);
 	return (output);
 }
 
@@ -75,10 +79,11 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 	unsigned int	start;
 
 	start = get_time();
+	(void)philo;
 	while (get_time() - start < time)
 	{
-		if (check_end_program(philo))
-			return ;
-		usleep(1);
+		// if (check_end_program(philo))
+		// 	return ;
+		usleep(100);
 	}
 }
