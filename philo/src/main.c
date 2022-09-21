@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/20 12:15:07 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:06:07 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	main(int ac, char **av)
 		{
 			pthread_mutex_lock(&data->rw_perm);
 			
-			if (get_time() - data->philo_array[i]->last_meal > data->time_to_die)
+			//if (get_time() - data->philo_array[i]->last_meal > data->time_to_die)
+			if ((get_time() - data->time_zero) - data->philo_array[i]->last_meal > data->time_to_die)
 			{
 				data->end_program = true;
 				pthread_mutex_unlock(&data->rw_perm);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:06:38 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/20 12:08:02 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:01:41 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_philo	*philo_create(t_data *data, int philo_id)
 	philo->fork_l = &data->forks_array[philo->id - 1];
 	philo->fork_r = &data->forks_array[philo->id % data->philo_nb];
 	philo->data = data;
-	philo->last_meal = get_time();
+	philo->last_meal = get_time() - data->time_zero;
 	pthread_create(&philo->thread, NULL, &routine, philo);
 	return (philo);
 }
