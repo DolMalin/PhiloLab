@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 16:33:22 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 17:23:50 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_bool	philo_is_dead(t_data *data)
 	i = 0;
 	while (i < data->philo_nb)
 	{
-		current_time = get_time() - data->time_zero;
+		current_time = get_time() - data->philo_array[i]->time_zero;
 		pthread_mutex_lock(&data->philo_array[i]->last_meal_perm);
 		if (current_time - data->philo_array[i]->last_meal > data->time_to_die)
 		{

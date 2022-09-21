@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 16:37:30 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 16:52:07 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	get_time(void)
 	static struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	//printf("tvsec %ld\n", tv.tv_sec);
 	return ((tv.tv_sec * 1000) + ((tv.tv_usec / 1000)));
 }
 
@@ -75,12 +74,12 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 {
 	unsigned int	start;
 
-	start = get_time();
-	usleep(time * 0.80);
 	(void)philo;
+	start = get_time();
+	usleep(time * 1000 * 0.8);
 	while (get_time() - start < time)
 	{
-		usleep(50);
+		usleep(100);
 	}
 }
 

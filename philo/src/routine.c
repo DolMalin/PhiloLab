@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 16:36:03 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 17:28:27 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	display(t_philo *philo, const char *str)
 	if (program_stop(philo))
 		return ;
 	time = get_time();
-	printf("%d %d %s\n", time - philo->data->time_zero, philo->id, str);
-	
+	printf("%d %d %s\n", time - philo->time_zero, philo->id, str);
+	//printf("%d %d %s\n", time - philo->time_zero, philo->id, str);
 	// pthread_mutex_lock(&philo->data->display_perm);
 	// ft_putnbr_fd(time - philo->data->time_zero, 1);
 	// write(1, " ", 1);
@@ -42,12 +42,14 @@ t_bool	routine_eat(t_philo *philo)
 	display(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	display(philo, "has taken a fork");
-	last_meal = get_time() - philo->data->time_zero;
+	
+	last_meal = get_time() - philo->time_zero;
+	//last_meal = get_time() - philo->time_zero;
+	
+	display(philo, "is eating");
 	pthread_mutex_lock(&philo->last_meal_perm);
 	philo->last_meal = last_meal;
 	pthread_mutex_unlock(&philo->last_meal_perm);
-	display(philo, "is eating");
-	
 	
 	ft_usleep(philo->data->time_to_eat, philo);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
@@ -79,13 +81,13 @@ void	*routine(void* arg)
 	
 	philo = arg;
 	i = 0;
-	philo->start_time = get_time();
+	philo->time_zero = get_time();
 	if (philo->id % 2 == 0)
-		usleep(philo->data->time_to_eat / 2);
+		usleep((philo->data->time_to_eat * 1000) / 4);
 	while (true)
 	{
-		if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)
-			break;
+		// if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)
+		// 	break;
 		if (!routine_eat(philo))
 			return (NULL);
 		if (!routine_sleep(philo))
@@ -93,7 +95,6 @@ void	*routine(void* arg)
 		if (!routine_think(philo))
 			return (NULL);
 		i++;
-	
 	}
 	return (NULL);
 }
