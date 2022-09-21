@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:23:50 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 17:35:06 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_bool	philo_is_dead(t_data *data)
 		{
 			pthread_mutex_lock(&data->end_program_perm);
 			// display(data->philo_array[i], "died");
-			printf("%d %d died\n", get_time() - data->time_zero, i + 1);
+			printf("%d %d died\n", get_time() - data->philo_array[i]->time_zero, i + 1);
 			data->end_program = true;
 			pthread_mutex_unlock(&data->end_program_perm);
 			pthread_mutex_unlock(&data->philo_array[i]->last_meal_perm);

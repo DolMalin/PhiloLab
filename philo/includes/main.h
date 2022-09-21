@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:23:59 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 17:36:01 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct	s_data
 	pthread_mutex_t	display_perm;
 	pthread_mutex_t	end_program_perm;
 	int				philo_nb;
-	int				time_zero;
 	int				time_to_die;
 	int				time_to_eat;
 	int 			time_to_sleep;
@@ -51,11 +50,8 @@ typedef struct	s_philo
 	t_data			*data;
 	int				last_meal;
 	int				time_zero;
-	int				start_time;
 	pthread_t		thread;
 	pthread_mutex_t	last_meal_perm;
-	// pthread_mutex_t	*fork_l;
-	// pthread_mutex_t	*fork_r;
 }				t_philo;
 
 /* ================ ~ UTILS ~ ================ */
