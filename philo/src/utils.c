@@ -6,17 +6,13 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/21 11:54:23 by aandric          ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/09/20 17:53:06 by pdal-mol         ###   ########.fr       */
->>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
+/*   Updated: 2022/09/21 18:01:38 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-t_bool	check_end_program(t_philo *philo)
+t_bool	program_stop(t_philo *philo)
 {
 	t_bool output;
 	
@@ -67,10 +63,10 @@ int	ft_atoi(const char *str)
 
 int	get_time(void)
 {
+	// STATIC ?????????
 	static struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	//printf("tvsec %ld\n", tv.tv_sec);
 	return ((tv.tv_sec * 1000) + ((tv.tv_usec / 1000)));
 }
 
@@ -78,12 +74,33 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 {
 	unsigned int	start;
 
-	start = get_time();
 	(void)philo;
+	start = get_time();
+	//usleep(time * 1000 * 0.9);
 	while (get_time() - start < time)
 	{
-		// if (check_end_program(philo))
-		// 	return ;
-		usleep(100);
+		usleep(500);
 	}
 }
+
+void	ft_putnbr_fd(int nb, int fd)
+{
+	long int	a;	
+	char		nb_char;
+
+	a = nb;
+	if (nb < 0)
+	{
+		write(fd, "-", 1);
+		a *= -1;
+	}
+	nb_char = a % 10 + '0';
+	if (a > 9)
+		ft_putnbr_fd(a / 10, fd);
+	write(fd, &nb_char, 1);
+}
+
+// void	ft_putstr(const char *str)
+// {
+// 	write(1, str, ft_strlen(str));
+// }

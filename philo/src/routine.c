@@ -6,11 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/21 13:30:52 by aandric          ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/09/20 17:50:21 by pdal-mol         ###   ########.fr       */
->>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
+/*   Updated: 2022/09/21 17:46:44 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +15,63 @@
 
 void	display(t_philo *philo, const char *str)
 {	
-	if (check_end_program(philo))
+	int time;
+	
+	if (program_stop(philo))
 		return ;
-	pthread_mutex_lock(&philo->data->display_perm);
-	printf("%d %d %s\n", get_time() - philo->start_time, philo->id, str);
-	pthread_mutex_unlock(&philo->data->display_perm);
+	time = get_time();
+	printf("%d %d %s\n", time - philo->time_zero, philo->id, str);
+	//printf("%d %d %s\n", time - philo->time_zero, philo->id, str);
+	// pthread_mutex_lock(&philo->data->display_perm);
+	// ft_putnbr_fd(time - philo->data->time_zero, 1);
+	// write(1, " ", 1);
+	// ft_putnbr_fd(philo->id, 1);
+	// write(1, " ", 1);
+	// write(1, str, ft_strlen(str));
+	// write(1, "\n", 1);
+	// pthread_mutex_unlock(&philo->data->display_perm);
 }
 
-void	routine_eat(t_philo *philo)
+t_bool	routine_eat(t_philo *philo)
 {
 	int last_meal;
-	// if (check_end_program(philo))
-		// return ;
-	pthread_mutex_lock(philo->fork_l);
+
+	if (program_stop(philo))
+			return (false);
+	pthread_mutex_lock(&philo->data->forks_array[philo->id - 1]);
 	display(philo, "has taken a fork");
-	pthread_mutex_lock(philo->fork_r);
+	pthread_mutex_lock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	display(philo, "has taken a fork");
-	display(philo, "is eating");
-	last_meal = get_time();
 	
-<<<<<<< HEAD
-	pthread_mutex_lock(&philo->data->rw_perm);
-	philo->last_meal = get_time() - philo->data->time_zero;
-	pthread_mutex_unlock(&philo->data->rw_perm);
-=======
+	last_meal = get_time() - philo->time_zero;
+	//last_meal = get_time() - philo->time_zero;
+	
+	display(philo, "is eating");
 	pthread_mutex_lock(&philo->last_meal_perm);
 	philo->last_meal = last_meal;
 	pthread_mutex_unlock(&philo->last_meal_perm);
->>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
 	
 	ft_usleep(philo->data->time_to_eat, philo);
-	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_unlock(philo->fork_r);
+	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
+	pthread_mutex_unlock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
+	return (true);
 }
 
-void	routine_sleep(t_philo *philo)
+t_bool	routine_sleep(t_philo *philo)
 {
-	// if (check_end_program(philo))
-		// return ;
+	if (program_stop(philo))
+			return (false);
 	display(philo, "is sleeping");
 	ft_usleep(philo->data->time_to_sleep, philo);
+	return (true);
 }
 
-void	routine_think(t_philo *philo)
+t_bool	routine_think(t_philo *philo)
 {
-	// if (check_end_program(philo))
-		// return ;
+	if (program_stop(philo))
+			return (false);
 	display(philo, "is thinking");
+	return (true);
 }
 
 void	*routine(void* arg)
@@ -75,18 +81,20 @@ void	*routine(void* arg)
 	
 	philo = arg;
 	i = 0;
-	philo->start_time = get_time();
+	philo->time_zero = get_time();
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep((philo->data->time_to_eat * 1000) / 4);
 	while (true)
 	{
-		if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)
-			break;
-		routine_eat(philo);
-		routine_sleep(philo);
-		routine_think(philo);
+		// if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)
+		// 	break;
+		if (!routine_eat(philo))
+			return (NULL);
+		if (!routine_sleep(philo))
+			return (NULL);
+		if (!routine_think(philo))
+			return (NULL);
 		i++;
-	
 	}
 	return (NULL);
 }
