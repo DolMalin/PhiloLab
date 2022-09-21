@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 16:18:11 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 16:36:03 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ t_bool	routine_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	display(philo, "has taken a fork");
 	last_meal = get_time() - philo->data->time_zero;
-	display(philo, "is eating");
 	pthread_mutex_lock(&philo->last_meal_perm);
 	philo->last_meal = last_meal;
 	pthread_mutex_unlock(&philo->last_meal_perm);
+	display(philo, "is eating");
+	
+	
 	ft_usleep(philo->data->time_to_eat, philo);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
@@ -79,7 +81,7 @@ void	*routine(void* arg)
 	i = 0;
 	philo->start_time = get_time();
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(philo->data->time_to_eat / 2);
 	while (true)
 	{
 		if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)

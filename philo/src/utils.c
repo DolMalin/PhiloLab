@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 16:08:23 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 16:37:30 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 	(void)philo;
 	while (get_time() - start < time)
 	{
-		if (program_stop(philo))
-			return ;
-		usleep(10);
+		usleep(50);
 	}
 }
 
