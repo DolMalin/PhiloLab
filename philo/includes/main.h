@@ -6,11 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/21 11:37:08 by aandric          ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/09/20 17:49:39 by pdal-mol         ###   ########.fr       */
->>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
+/*   Updated: 2022/09/21 14:38:46 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +60,7 @@ typedef struct	s_philo
 /* ================ ~ UTILS ~ ================ */
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
-t_bool	check_end_program(t_philo *philo);
+t_bool	program_stop(t_philo *philo);
 
 /* ================ ~ PARSING ~ ================ */
 t_bool	check_input(int ac, char **av);

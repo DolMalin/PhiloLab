@@ -6,11 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/21 13:29:13 by aandric          ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/09/20 17:51:58 by pdal-mol         ###   ########.fr       */
->>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
+/*   Updated: 2022/09/21 15:52:20 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +36,7 @@ void	log_forks(t_data *data)
 }
 /* ================================================= */
 
-t_bool	check_death(t_data *data)
+/*t_bool	philo_is_dead(t_data *data)
 {
 	int i ;
 	int last_meal;
@@ -67,7 +63,31 @@ t_bool	check_death(t_data *data)
 		i++;
 	}
 	return (false);
-	
+}*/
+
+t_bool	philo_is_dead(t_data *data)
+{
+	int	i;
+	int current_time;
+
+	i = 0;
+	while (i < data->philo_nb)
+	{
+		current_time = get_time() - data->time_zero;
+		pthread_mutex_lock(&data->philo_array[i]->last_meal_perm);
+		if (current_time - data->philo_array[i]->last_meal > data->time_to_die)
+		{
+			printf("%d %d died\n", get_time() - data->time_zero, i + 1);
+			pthread_mutex_lock(&data->end_program_perm);
+			data->end_program = true;
+			pthread_mutex_unlock(&data->end_program_perm);
+			pthread_mutex_unlock(&data->philo_array[i]->last_meal_perm);
+			return (true);
+		}
+		pthread_mutex_unlock(&data->philo_array[i]->last_meal_perm);
+		i++;
+	}
+	return (false);
 }
 
 int	main(int ac, char **av)
@@ -85,30 +105,8 @@ int	main(int ac, char **av)
 		free(data);
 		return (0);
 	}
-	while(true)
-	{
-<<<<<<< HEAD
-		int i = 0;
-		while (i < data->philo_nb)
-		{
-			pthread_mutex_lock(&data->rw_perm);
-			
-			//if (get_time() - data->philo_array[i]->last_meal > data->time_to_die)
-			if (((get_time() - data->time_zero) - data->philo_array[i]->last_meal) > data->time_to_die)
-			{
-				data->end_program = true;
-				pthread_mutex_unlock(&data->rw_perm);
-				printf("philo %d died\n", i + 1);
-				break ;
-			}
-			pthread_mutex_unlock(&data->rw_perm);
-			i++;
-		}
-=======
-		if (check_death(data))
-			break;
->>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
-	} 
+	while(!philo_is_dead(data))
+		;
 	philo_join_all(data->philo_array);
 	data_free(data);
 	return (0);
