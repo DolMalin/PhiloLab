@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 15:47:50 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 15:59:02 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	display(t_philo *philo, const char *str)
 	if (program_stop(philo))
 		return ;
 	time = get_time();
-	// pthread_mutex_lock(&philo->data->display_perm);
 	printf("%d %d %s\n", time - philo->data->time_zero, philo->id, str);
-	// pthread_mutex_unlock(&philo->data->display_perm);
 }
 
 t_bool	routine_eat(t_philo *philo)
@@ -31,9 +29,9 @@ t_bool	routine_eat(t_philo *philo)
 
 	if (program_stop(philo))
 			return (false);
-	pthread_mutex_lock(philo->fork_l);
+	pthread_mutex_lock(&philo->data->forks_array[philo->id - 1]);
 	display(philo, "has taken a fork");
-	pthread_mutex_lock(philo->fork_r);
+	pthread_mutex_lock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	display(philo, "has taken a fork");
 	last_meal = get_time() - philo->data->time_zero;
 	display(philo, "is eating");
@@ -41,8 +39,8 @@ t_bool	routine_eat(t_philo *philo)
 	philo->last_meal = last_meal;
 	pthread_mutex_unlock(&philo->last_meal_perm);
 	ft_usleep(philo->data->time_to_eat, philo);
-	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_unlock(philo->fork_r);
+	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
+	pthread_mutex_unlock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	return (true);
 }
 
