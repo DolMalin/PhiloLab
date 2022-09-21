@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/20 12:07:22 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:15:38 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,26 @@ size_t	ft_strlen(const char *str)
 int	ft_atoi(const char *str)
 {
 	int					i;
-	int					signe;
+	int					sign;
 	unsigned long long	result;
 
 	i = 0;
 	result = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	signe = (str[i] == '-') * -1 + (str[i] != '-') * 1;
+	sign = (str[i] == '-') * -1 + (str[i] != '-') * 1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + str[i] - '0';
-		if (signe == 1 && result > INT32_MAX)
+		if (sign == 1 && result > INT32_MAX)
 			return (0);
 		if (result > (unsigned long long)INT32_MAX + 1)
 			return (0);
 		i++;
 	}
-	return ((int)(result * signe));
+	return ((int)(result * sign));
 }
 
 int	get_time(void)
