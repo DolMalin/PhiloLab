@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:12:46 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:35:50 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 17:38:04 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_data	*data_init(int ac, char **av)
 		data->meals_nb = -1;
 	data->forks_array = forks_init(data->philo_nb);
 	data->end_program = false;
-	pthread_mutex_init(&data->display_perm, NULL);
 	pthread_mutex_init(&data->end_program_perm, NULL);
 	return (data);
 }
