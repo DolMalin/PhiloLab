@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/20 12:08:54 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:30:52 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	routine_eat(t_philo *philo)
 	display(philo, "is eating");
 	
 	pthread_mutex_lock(&philo->data->rw_perm);
-	philo->last_meal = get_time();
+	philo->last_meal = get_time() - philo->data->time_zero;
 	pthread_mutex_unlock(&philo->data->rw_perm);
 	
 	ft_usleep(philo->data->time_to_eat, philo);
