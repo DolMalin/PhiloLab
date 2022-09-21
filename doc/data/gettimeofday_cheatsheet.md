@@ -18,3 +18,6 @@ struct timeval
 };
 ```
 The gettimeofday function gives the seconds and microseconds since the 1st January 1970.
+It takes as a first argument a pointer to the struct below. 
+The second argument tz(timezone) is often NULL.
+FI : 1 second = 1 000 000 microseconds
