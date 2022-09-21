@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:12:46 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/20 11:59:45 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:38:20 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_data	*data_init(int ac, char **av)
 	if (!data)
 		return (NULL);
 	data->philo_nb = ft_atoi(av[1]);
+	data->time_zero = get_time();
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);

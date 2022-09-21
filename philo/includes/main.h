@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/20 12:07:56 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:37:08 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_data
 	pthread_mutex_t	display_perm;
 	pthread_mutex_t	rw_perm;
 	int				philo_nb;
+	int				time_zero;
 	int				time_to_die;
 	int				time_to_eat;
 	int 			time_to_sleep;
