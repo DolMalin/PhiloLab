@@ -24,6 +24,18 @@ t_bool	program_stop(t_philo *philo)
 	return (output);
 }
 
+t_bool	meals_stop(t_philo *philo)
+{
+	t_bool output;
+	
+	output = false;
+	pthread_mutex_lock(&philo->data->end_meals_perm);
+	if (philo->data->end_meals)
+		output = true;
+	pthread_mutex_unlock(&philo->data->end_meals_perm);
+	return (output);
+}
+
 size_t	ft_strlen(const char *str)
 {
 	size_t i;
@@ -76,7 +88,6 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 
 	(void)philo;
 	start = get_time();
-	//usleep(time * 1000 * 0.9);
 	while (get_time() - start < time)
 	{
 		usleep(500);
@@ -99,8 +110,3 @@ void	ft_putnbr_fd(int nb, int fd)
 		ft_putnbr_fd(a / 10, fd);
 	write(fd, &nb_char, 1);
 }
-
-// void	ft_putstr(const char *str)
-// {
-// 	write(1, str, ft_strlen(str));
-// }

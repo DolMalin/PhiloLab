@@ -35,12 +35,14 @@ typedef struct	s_data
 	struct s_philo	**philo_array;
 	pthread_mutex_t	*forks_array;
 	pthread_mutex_t	end_program_perm;
+	pthread_mutex_t	end_meals_perm;
 	int				philo_nb;
 	int				time_to_die;
 	int				time_to_eat;
 	int 			time_to_sleep;
 	int				meals_nb;
 	t_bool			end_program;
+	t_bool			end_meals;
 }				t_data;
 
 typedef struct	s_philo
@@ -48,16 +50,18 @@ typedef struct	s_philo
 	int				id;
 	t_data			*data;
 	int				last_meal;
+	int				meal_count;
 	int				time_zero;
 	pthread_t		thread;
 	pthread_mutex_t	last_meal_perm;
+	pthread_mutex_t meal_count_perm;
 }				t_philo;
 
 /* ================ ~ UTILS ~ ================ */
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
 t_bool	program_stop(t_philo *philo);
-void	ft_putnbr_fd(int nb, int fd);
+t_bool	meals_stop(t_philo *philo);
 
 /* ================ ~ PARSING ~ ================ */
 t_bool	check_input(int ac, char **av);

@@ -20,12 +20,11 @@ static t_philo	*philo_create(t_data *data, int philo_id)
 	if (!philo)
 		return (NULL);
 	philo->id = philo_id;
-	// philo->fork_l = &data->forks_array[philo->id - 1];
-	// philo->fork_r = &data->forks_array[philo->id % data->philo_nb];
 	philo->data = data;
 	philo->last_meal = get_time();
-	//philo->time_zero = get_time();
+	philo->meal_count = 0;
 	pthread_mutex_init(&philo->last_meal_perm, NULL);
+	pthread_mutex_init(&philo->meal_count_perm, NULL);
 	pthread_create(&philo->thread, NULL, &routine, philo);
 	return (philo);
 }
