@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 15:59:02 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 16:18:11 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ void	display(t_philo *philo, const char *str)
 		return ;
 	time = get_time();
 	printf("%d %d %s\n", time - philo->data->time_zero, philo->id, str);
+	
+	// pthread_mutex_lock(&philo->data->display_perm);
+	// ft_putnbr_fd(time - philo->data->time_zero, 1);
+	// write(1, " ", 1);
+	// ft_putnbr_fd(philo->id, 1);
+	// write(1, " ", 1);
+	// write(1, str, ft_strlen(str));
+	// write(1, "\n", 1);
+	// pthread_mutex_unlock(&philo->data->display_perm);
 }
 
 t_bool	routine_eat(t_philo *philo)

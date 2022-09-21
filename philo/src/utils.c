@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 15:41:30 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 16:08:23 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,25 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 		usleep(10);
 	}
 }
+
+void	ft_putnbr_fd(int nb, int fd)
+{
+	long int	a;	
+	char		nb_char;
+
+	a = nb;
+	if (nb < 0)
+	{
+		write(fd, "-", 1);
+		a *= -1;
+	}
+	nb_char = a % 10 + '0';
+	if (a > 9)
+		ft_putnbr_fd(a / 10, fd);
+	write(fd, &nb_char, 1);
+}
+
+// void	ft_putstr(const char *str)
+// {
+// 	write(1, str, ft_strlen(str));
+// }
