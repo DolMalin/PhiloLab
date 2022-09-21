@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:06:38 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/16 17:27:28 by pdal-mol         ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2022/09/21 12:01:41 by aandric          ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/09/20 17:50:01 by pdal-mol         ###   ########.fr       */
+>>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +26,14 @@ static t_philo	*philo_create(t_data *data, int philo_id)
 	philo->id = philo_id;
 	philo->fork_l = &data->forks_array[philo->id - 1];
 	philo->fork_r = &data->forks_array[philo->id % data->philo_nb];
-	philo->write_perm = &data->write_perm;
 	philo->data = data;
+<<<<<<< HEAD
+	philo->last_meal = get_time() - data->time_zero;
+=======
+	philo->last_meal = get_time();
+	pthread_mutex_init(&philo->last_meal_perm, NULL);
+>>>>>>> 837ba01 (fix(mutex): last_meal mutex is now unique for each philosopher and not shared anymore with other philos but only with main)
 	pthread_create(&philo->thread, NULL, &routine, philo);
-	pthread_join(philo->thread, NULL);
 	return (philo);
 }
 
@@ -48,6 +56,18 @@ t_philo **philo_create_array(t_data *data)
 		i++;
 	}
 	return(philo_array);
+}
+
+void	philo_join_all(t_philo **philo_array)
+{
+	int i;
+
+	i = 0;
+	while (philo_array[i])
+	{
+		pthread_join(philo_array[i]->thread, NULL);
+		i++;
+	}
 }
 
 void	philo_free(t_philo **philo_array, int philo_nb)

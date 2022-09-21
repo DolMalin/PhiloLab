@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 15:59:41 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/09/16 16:39:20 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/09/17 19:25:34 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ SRC =		${addprefix src/, ${SRC_FILES}}
 OBJS = 		${SRC:.c=.o}
 NAME = 		philo
 HEADERS = 	includes/main.h
-CFLAGS = 	-Wall -Wextra -Werror 
-# -fsanitize=thread -g3 
+CFLAGS = 	-Wall -Wextra -Werror -fsanitize=thread -g3 
 CC = 		gcc
 
 %.o: 		%.c ${HEADERS} Makefile 
