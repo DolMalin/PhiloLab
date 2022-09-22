@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:37:54 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 11:26:41 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_philo
 	int				id;
 	t_data			*data;
 	int				last_meal;
+	int				meals_nb;
 	int				time_zero;
 	pthread_t		thread;
 	pthread_mutex_t	last_meal_perm;

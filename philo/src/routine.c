@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:46:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 15:37:55 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ t_bool	routine_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	display(philo, "has taken a fork");
 	
-	last_meal = get_time() - philo->time_zero;
-	//last_meal = get_time() - philo->time_zero;
+	last_meal = get_time();
 	
 	display(philo, "is eating");
 	pthread_mutex_lock(&philo->last_meal_perm);
@@ -82,12 +81,18 @@ void	*routine(void* arg)
 	philo = arg;
 	i = 0;
 	philo->time_zero = get_time();
+	if (philo->data->philo_nb == 1)
+	{
+		pthread_mutex_lock(&philo->data->forks_array[philo->id - 1]);
+		display(philo, "has taken a fork");
+		ft_usleep(philo->data->time_to_die, philo);
+		pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
+		return (NULL);
+	}
 	if (philo->id % 2 == 0)
 		usleep((philo->data->time_to_eat * 1000) / 4);
 	while (true)
 	{
-		// if (i >= philo->data->meals_nb && philo->data->meals_nb != -1)
-		// 	break;
 		if (!routine_eat(philo))
 			return (NULL);
 		if (!routine_sleep(philo))
