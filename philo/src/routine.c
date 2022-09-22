@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 15:45:33 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 17:29:48 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool	routine_eat(t_philo *philo)
 	int last_meal;
 
 	if (program_stop(philo))
-			return (false);
+		return (false);
 	pthread_mutex_lock(&philo->data->forks_array[philo->id - 1]);
 	display(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
@@ -43,9 +43,12 @@ t_bool	routine_eat(t_philo *philo)
 	ft_usleep(philo->data->time_to_eat, philo);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
-	pthread_mutex_lock(&philo->meal_count_perm);
-	philo->meals_count++;
-	pthread_mutex_unlock(&philo->meal_count_perm);
+	if (philo->data->meals_nb != -1)
+	{
+		pthread_mutex_lock(&philo->meal_count_perm);
+		philo->meals_count++;
+		pthread_mutex_unlock(&philo->meal_count_perm);
+	} // check if this condition optimizes the program 
 	return (true);
 }
 
@@ -83,7 +86,7 @@ void	*routine(void* arg)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
-		usleep((philo->data->time_to_eat * 1000) / 4);
+		ft_usleep((philo->data->time_to_eat) / 4, philo);
 	while (true)
 	{
 		if (!routine_eat(philo))
