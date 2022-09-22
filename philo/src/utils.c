@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 18:01:38 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 17:47:44 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ t_bool	program_stop(t_philo *philo)
 	if (philo->data->end_program)
 		output = true;
 	pthread_mutex_unlock(&philo->data->end_program_perm);
+	return (output);
+}
+
+t_bool	meals_stop(t_philo *philo)
+{
+	t_bool output;
+	
+	output = false;
+	pthread_mutex_lock(&philo->data->end_meals_perm);
+	if (philo->data->end_meals)
+		output = true;
+	pthread_mutex_unlock(&philo->data->end_meals_perm);
 	return (output);
 }
 
@@ -53,9 +65,9 @@ int	ft_atoi(const char *str)
 	{
 		result = result * 10 + str[i] - '0';
 		if (sign == 1 && result > INT32_MAX)
-			return (0);
+			return (-1);
 		if (result > (unsigned long long)INT32_MAX + 1)
-			return (0);
+			return (-1);
 		i++;
 	}
 	return ((int)(result * sign));
@@ -74,11 +86,11 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 {
 	unsigned int	start;
 
-	(void)philo;
 	start = get_time();
-	//usleep(time * 1000 * 0.9);
 	while (get_time() - start < time)
 	{
+		if (program_stop(philo))
+			return ;
 		usleep(500);
 	}
 }
@@ -99,8 +111,3 @@ void	ft_putnbr_fd(int nb, int fd)
 		ft_putnbr_fd(a / 10, fd);
 	write(fd, &nb_char, 1);
 }
-
-// void	ft_putstr(const char *str)
-// {
-// 	write(1, str, ft_strlen(str));
-// }

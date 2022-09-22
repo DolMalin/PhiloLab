@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:35:06 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 17:17:53 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,6 @@ void	log_forks(t_data *data)
 }
 /* ================================================= */
 
-/*t_bool	philo_is_dead(t_data *data)
-{
-	int i ;
-	int last_meal;
-	int	time;
-
-	i = 0;
-	last_meal = 0;
-	time = get_time();
-	while (i < data->philo_nb)
-	{
-		pthread_mutex_lock(&data->philo_array[i]->last_meal_perm);
-		last_meal = data->philo_array[i]->last_meal; 
-		if (time - last_meal> data->time_to_die)
-		{
-			pthread_mutex_unlock(&data->philo_array[i]->last_meal_perm);
-			pthread_mutex_lock(&data->end_program_perm);
-			data->end_program = true;
-			pthread_mutex_unlock(&data->end_program_perm);
-			printf("philo %d died at %d\n", i + 1, get_time() - data->philo_array[i]->start_time);
-			pthread_mutex_unlock(&data->philo_array[i]->last_meal_perm);
-			return (true);
-		}
-		pthread_mutex_unlock(&data->philo_array[i]->last_meal_perm);
-		i++;
-	}
-	return (false);
-}*/
-
 t_bool	philo_is_dead(t_data *data)
 {
 	int	i;
@@ -73,12 +44,11 @@ t_bool	philo_is_dead(t_data *data)
 	i = 0;
 	while (i < data->philo_nb)
 	{
-		current_time = get_time() - data->philo_array[i]->time_zero;
+		current_time = get_time();
 		pthread_mutex_lock(&data->philo_array[i]->last_meal_perm);
 		if (current_time - data->philo_array[i]->last_meal > data->time_to_die)
 		{
 			pthread_mutex_lock(&data->end_program_perm);
-			// display(data->philo_array[i], "died");
 			printf("%d %d died\n", get_time() - data->philo_array[i]->time_zero, i + 1);
 			data->end_program = true;
 			pthread_mutex_unlock(&data->end_program_perm);
@@ -89,6 +59,30 @@ t_bool	philo_is_dead(t_data *data)
 		i++;
 	}
 	return (false);
+}
+
+t_bool	all_meals_done(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->meals_nb == -1)
+		return (false);
+	while (i < data->philo_nb)
+	{
+		pthread_mutex_lock(&data->philo_array[i]->meal_count_perm);
+		if (data->philo_array[i]->meals_count < data->meals_nb)
+		{
+			pthread_mutex_unlock(&data->philo_array[i]->meal_count_perm);
+			return (false);
+		}
+		pthread_mutex_unlock(&data->philo_array[i]->meal_count_perm);
+		i++;
+	}
+	pthread_mutex_lock(&data->end_program_perm);
+	data->end_program = true;
+	pthread_mutex_unlock(&data->end_program_perm);
+	return (true);
 }
 
 int	main(int ac, char **av)
@@ -106,7 +100,7 @@ int	main(int ac, char **av)
 		free(data);
 		return (0);
 	}
-	while(!philo_is_dead(data))
+	while(!philo_is_dead(data) && !all_meals_done(data))
 		;
 	philo_join_all(data->philo_array);
 	data_free(data);

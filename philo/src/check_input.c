@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:17:20 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/17 14:06:24 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:48:09 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ static t_bool	all_positive_digits(char **av)
 	return (true);
 }
 
+static t_bool	integer_overflow(char **av)
+{
+	size_t	i;
+
+	i = 1;
+	while (av[i])
+	{
+		if (ft_atoi(av[i]) < 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 t_bool	check_input(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
@@ -47,9 +61,14 @@ t_bool	check_input(int ac, char **av)
 		printf("Invalid number of arguments\n");
 		return (false);
 	}
-	else if (!all_positive_digits(av))
+	else if (!all_positive_digits(av) || av[1][0] == '0')
 	{
 		printf("Invalid or empty character\n");
+		return (false);
+	}
+	if (integer_overflow(av))
+	{
+		printf("Integer overflow\n");
 		return (false);
 	}
 	return (true);
