@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 15:37:55 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 15:41:06 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ void	display(t_philo *philo, const char *str)
 		return ;
 	time = get_time();
 	printf("%d %d %s\n", time - philo->time_zero, philo->id, str);
-	//printf("%d %d %s\n", time - philo->time_zero, philo->id, str);
-	// pthread_mutex_lock(&philo->data->display_perm);
-	// ft_putnbr_fd(time - philo->data->time_zero, 1);
-	// write(1, " ", 1);
-	// ft_putnbr_fd(philo->id, 1);
-	// write(1, " ", 1);
-	// write(1, str, ft_strlen(str));
-	// write(1, "\n", 1);
-	// pthread_mutex_unlock(&philo->data->display_perm);
 }
 
 t_bool	routine_eat(t_philo *philo)
@@ -49,16 +40,18 @@ t_bool	routine_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->last_meal_perm);
 	philo->last_meal = last_meal;
 	pthread_mutex_unlock(&philo->last_meal_perm);
-	
 	ft_usleep(philo->data->time_to_eat, philo);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
+	pthread_mutex_lock(&philo->meal_count_perm);
+	philo->meal_count++;
+	pthread_mutex_unlock(&philo->meal_count_perm);
 	return (true);
 }
 
 t_bool	routine_sleep(t_philo *philo)
 {
-	if (program_stop(philo))
+	if (program_stop(philo) || meals_stop(philo))
 			return (false);
 	display(philo, "is sleeping");
 	ft_usleep(philo->data->time_to_sleep, philo);
@@ -67,7 +60,7 @@ t_bool	routine_sleep(t_philo *philo)
 
 t_bool	routine_think(t_philo *philo)
 {
-	if (program_stop(philo))
+	if (program_stop(philo) || meals_stop(philo))
 			return (false);
 	display(philo, "is thinking");
 	return (true);

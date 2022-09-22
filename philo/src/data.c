@@ -49,7 +49,9 @@ t_data	*data_init(int ac, char **av)
 		data->meals_nb = -1;
 	data->forks_array = forks_init(data->philo_nb);
 	data->end_program = false;
+	data->end_meals = false;
 	pthread_mutex_init(&data->end_program_perm, NULL);
+	pthread_mutex_init(&data->end_meals_perm, NULL);
 	return (data);
 }
 
