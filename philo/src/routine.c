@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 15:41:06 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 15:45:33 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_bool	routine_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id - 1]);
 	pthread_mutex_unlock(&philo->data->forks_array[philo->id % philo->data->philo_nb]);
 	pthread_mutex_lock(&philo->meal_count_perm);
-	philo->meal_count++;
+	philo->meals_count++;
 	pthread_mutex_unlock(&philo->meal_count_perm);
 	return (true);
 }

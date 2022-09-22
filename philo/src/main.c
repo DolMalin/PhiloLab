@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:03:44 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 15:40:51 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 15:43:20 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_bool	philo_is_dead(t_data *data)
 t_bool	all_meals_done(t_data *data)
 {
 	int	i;
-
+	int	current_time;
+	
 	i = 0;
 	if (data->meals_nb == -1)
 		return (false);

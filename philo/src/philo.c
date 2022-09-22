@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:06:38 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/22 15:40:49 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 15:44:59 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_philo	*philo_create(t_data *data, int philo_id)
 		return (NULL);
 	philo->id = philo_id;
 	philo->data = data;
-	philo->meals_nb = philo->data->meals_nb;
+	philo->meals_count = 0;
 	philo->last_meal = get_time();
 	pthread_mutex_init(&philo->last_meal_perm, NULL);
 	pthread_mutex_init(&philo->meal_count_perm, NULL);
