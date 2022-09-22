@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 17:27:04 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 17:47:44 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	ft_atoi(const char *str)
 	{
 		result = result * 10 + str[i] - '0';
 		if (sign == 1 && result > INT32_MAX)
-			return (0);
+			return (-1);
 		if (result > (unsigned long long)INT32_MAX + 1)
-			return (0);
+			return (-1);
 		i++;
 	}
 	return ((int)(result * sign));
