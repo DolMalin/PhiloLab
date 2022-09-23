@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:17:20 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 17:48:09 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 15:39:09 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ t_bool	check_input(int ac, char **av)
 	{
 		printf("Integer overflow\n");
 		return (false);
+	}
+	if (ac == 6)
+	{
+		if (av[5][0] == '0')
+			return (false);
 	}
 	return (true);
 }

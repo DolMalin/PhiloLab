@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 15:59:41 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/09/22 17:19:45 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/09/23 15:53:13 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC_FILES =	main.c \
 			utils.c \
 			philo.c \
 			data.c \
-			routine.c
+			routine.c \
+			check_routine.c
 
 SRC =		${addprefix src/, ${SRC_FILES}}
 OBJS = 		${SRC:.c=.o}

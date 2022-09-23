@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:06:38 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/22 15:44:59 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 15:44:23 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_philo	*philo_create(t_data *data, int philo_id)
 {
-	t_philo *philo;
-	
+	t_philo	*philo;
+
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		return (NULL);
@@ -29,14 +29,10 @@ static t_philo	*philo_create(t_data *data, int philo_id)
 	return (philo);
 }
 
-/* TODO:
-	secure if philo_create return null and free all thats being allocated
-*/
-
-t_philo **philo_create_array(t_data *data)
+t_philo	**philo_create_array(t_data *data)
 {
 	t_philo	**philo_array;
-	int	i;
+	int		i;
 
 	philo_array = malloc(sizeof(t_philo) * data->philo_nb);
 	if (!philo_array)
@@ -45,14 +41,19 @@ t_philo **philo_create_array(t_data *data)
 	while (i < data->philo_nb)
 	{
 		philo_array[i] = philo_create(data, i + 1);
+		if (!philo_array[i])
+		{
+			philo_free(philo_array, i - 1);
+			return (NULL);
+		}
 		i++;
 	}
-	return(philo_array);
+	return (philo_array);
 }
 
 void	philo_join_all(t_philo **philo_array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (philo_array[i])
