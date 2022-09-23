@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:12:46 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/21 17:38:04 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 15:42:22 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-/* 
-	Decide if we wants mutex_array as * or **
-*/
-static pthread_mutex_t	*forks_init(int	philo_nb)
+static pthread_mutex_t	*forks_init(int philo_nb)
 {
 	int				i;
 	pthread_mutex_t	*forks_array;
@@ -48,6 +45,8 @@ t_data	*data_init(int ac, char **av)
 	else
 		data->meals_nb = -1;
 	data->forks_array = forks_init(data->philo_nb);
+	if (!data->forks_array)
+		return (NULL);
 	data->end_program = false;
 	data->end_meals = false;
 	pthread_mutex_init(&data->end_program_perm, NULL);
@@ -58,10 +57,6 @@ t_data	*data_init(int ac, char **av)
 void	data_free(t_data *data)
 {
 	philo_free(data->philo_array, data->philo_nb);
-	/* TODO:
-		Use of mutex destroy?
-	*/
 	free(data->forks_array);
 	free(data);
-	
 }

@@ -3,42 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:10 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/22 17:47:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 15:51:31 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-t_bool	program_stop(t_philo *philo)
-{
-	t_bool output;
-	
-	output = false;
-	pthread_mutex_lock(&philo->data->end_program_perm);
-	if (philo->data->end_program)
-		output = true;
-	pthread_mutex_unlock(&philo->data->end_program_perm);
-	return (output);
-}
-
-t_bool	meals_stop(t_philo *philo)
-{
-	t_bool output;
-	
-	output = false;
-	pthread_mutex_lock(&philo->data->end_meals_perm);
-	if (philo->data->end_meals)
-		output = true;
-	pthread_mutex_unlock(&philo->data->end_meals_perm);
-	return (output);
-}
-
 size_t	ft_strlen(const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -75,7 +51,6 @@ int	ft_atoi(const char *str)
 
 int	get_time(void)
 {
-	// STATIC ?????????
 	static struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
@@ -93,21 +68,4 @@ void	ft_usleep(unsigned int time, t_philo *philo)
 			return ;
 		usleep(500);
 	}
-}
-
-void	ft_putnbr_fd(int nb, int fd)
-{
-	long int	a;	
-	char		nb_char;
-
-	a = nb;
-	if (nb < 0)
-	{
-		write(fd, "-", 1);
-		a *= -1;
-	}
-	nb_char = a % 10 + '0';
-	if (a > 9)
-		ft_putnbr_fd(a / 10, fd);
-	write(fd, &nb_char, 1);
 }
