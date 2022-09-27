@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/23 15:57:29 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:41:40 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	ft_usleep(unsigned int time, t_philo *philo);
 
 /* ================ ~ CHECK ROUTINE ~ ================ */
 t_bool	program_stop(t_philo *philo);
-t_bool	meals_stop(t_philo *philo);
 t_bool	philo_is_dead(t_data *data);
 t_bool	all_meals_done(t_data *data);
 
