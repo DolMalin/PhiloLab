@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:02:03 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/27 16:41:40 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 16:57:39 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_philo
 /* ================ ~ UTILS ~ ================ */
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
-t_bool	program_stop(t_philo *philo);
-t_bool	meals_stop(t_philo *philo);
+int		get_time(void);
+void	ft_usleep(unsigned int time, t_philo *philo);
 
 /* ================ ~ PARSING ~ ================ */
 t_bool	check_input(int ac, char **av);
@@ -74,12 +74,11 @@ void	data_free(t_data *data);
 
 /* ================ ~ ROUTINE ~ ================ */
 void	*routine(void *arg);
-int		get_time(void);
 void	display(t_philo *philo, const char *str);
-void	ft_usleep(unsigned int time, t_philo *philo);
 
 /* ================ ~ CHECK ROUTINE ~ ================ */
 t_bool	program_stop(t_philo *philo);
+t_bool	meals_stop(t_philo *philo);
 t_bool	philo_is_dead(t_data *data);
 t_bool	all_meals_done(t_data *data);
 
