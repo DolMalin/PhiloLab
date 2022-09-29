@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:38:56 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/09/29 18:08:34 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 18:09:42 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	routine_eat(t_philo *philo)
 {
 	int	last_meal;
 
-	if (program_stop(philo))
+	if (program_stop(philo) || meals_stop(philo))
 		return (false);
 	pthread_mutex_lock(&philo->data->forks_array[philo->id - 1]);
 	display(philo, "has taken a fork");
