@@ -11,7 +11,7 @@ Creates a new thread
 
 int pthread_create(pthread_t * thread, pthread_attr_t * attr, void * (*start_routine)(void *), void * arg);
 ```
-**thread = pointer to the thread
+thread = pointer to the thread
 
 attr = attribute of the thread but can be Null because its attributed automaticaly
 
